@@ -1,0 +1,287 @@
+<!DOCTYPE html>
+<!-- Coding Academy - Website single page (Beranda, Gallery, Jadwal, Pendaftaran, Tentang) -->
+<!-- Struktur: HTML + css/style.css + js/script.js | Bahasa Indonesia semua -->
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <!-- Viewport agar responsif di HP/tablet -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Coding Academy</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+    <!-- ===== NAVBAR ===== -->
+    <!-- Desktop: logo kiri, menu tengah/kanan, tema kanan | Mobile: logo + hamburger -->
+    <nav>
+        <div class="nav-container">
+            <!-- Logo / nama -->
+            <a class="nav-logo" onclick="tampilkanHalaman('gallery')" role="button" tabindex="0">Coding Academy</a>
+
+            <!-- Menu navigasi: data-target dipakai JS untuk highlight aktif -->
+            <ul class="nav-menu" id="navMenu">
+                <li><a data-target="beranda" onclick="tampilkanHalaman('beranda')">Beranda</a></li>
+                <li><a data-target="gallery" onclick="tampilkanHalaman('gallery')" class="active">Gallery</a></li>
+                <li><a data-target="jadwal" onclick="tampilkanHalaman('jadwal')">Jadwal</a></li>
+                <li><a data-target="pendaftaran" onclick="tampilkanHalaman('pendaftaran')">Pendaftaran</a></li>
+                <li><a data-target="tentang" onclick="tampilkanHalaman('tentang')">Tentang</a></li>
+            </ul>
+
+            <!-- Grup aksi kanan: tombol tema + hamburger -->
+            <div class="nav-actions">
+                <button id="btnTema" class="theme-toggle" type="button" aria-label="Ganti tema gelap atau terang">🌙 Mode Gelap</button>
+                <!-- Hamburger: hanya tampil di tablet/HP, mengontrol navMenu -->
+                <button id="btnHamburger" class="hamburger" type="button"
+                    aria-label="Buka menu navigasi"
+                    aria-expanded="false"
+                    aria-controls="navMenu">
+                    <span></span><span></span><span></span>
+                </button>
+            </div>
+        </div>
+    </nav>
+
+    <!-- ===== KONTEN UTAMA ===== -->
+    <main>
+
+        <!-- ===== HALAMAN: BERANDA ===== -->
+        <section id="beranda" class="section">
+            <div class="hero">
+                <h1>Selamat Datang di Coding Academy</h1>
+                <p>Tempat terbaik untuk belajar programming dari nol sampai siap kerja. Pilih program favoritmu!</p>
+            </div>
+            <p class="intro-text">Kami menyediakan workshop, bootcamp, hackathon, dan mentoring karier IT dengan mentor berpengalaman.</p>
+            <div class="hero-actions">
+                <button class="btn btn-primary" onclick="tampilkanHalaman('gallery')">Lihat Galeri Kegiatan</button>
+                <button class="btn btn-secondary" onclick="navigasiKePendaftaran()">Daftar Sekarang</button>
+            </div>
+        </section>
+
+        <!-- ===== HALAMAN 1: GALLERY (wajib tugas) ===== -->
+        <section id="gallery" class="section active">
+            <!-- Judul hero singkat -->
+            <div class="hero">
+                <h1>Galeri Kegiatan Coding Academy</h1>
+                <p>Jelajahi berbagai program pelatihan dan kegiatan menarik untuk mengembangkan skill programming Anda</p>
+            </div>
+
+            <!-- Breadcrumb navigasi -->
+            <div class="breadcrumb">
+                <a onclick="tampilkanHalaman('beranda')">Beranda</a> &gt; Gallery
+            </div>
+
+            <!-- Pencarian gallery (fitur tambahan) -->
+            <div class="search-bar">
+                <input type="text" id="inputCari" placeholder="🔍 Cari kegiatan... (misal: Python, Web, Hackathon)" autocomplete="off">
+            </div>
+            <p id="pesanCari" class="no-data" style="display:none">Tidak ada kegiatan yang cocok dengan pencarian.</p>
+
+            <!-- Grid card: 3 kolom desktop, 2 tablet, 1 HP -->
+            <div class="gallery-grid">
+                <!-- Card 1 -->
+                <div class="card" onclick="tampilkanDetail(1)">
+                    <img src="images/webdev.svg" alt="Ilustrasi Workshop Web Development - jendela browser dan kode HTML CSS JavaScript" loading="lazy" width="600" height="400">
+                    <div class="card-content">
+                        <h3>Workshop Web Development</h3>
+                        <p>Pelajari dasar-dasar membangun website modern dengan HTML, CSS, dan JavaScript. Workshop ini cocok untuk pemula yang ingin memulai karir di bidang web development.</p>
+                        <span class="badge">Populer</span>
+                    </div>
+                </div>
+                <!-- Card 2 -->
+                <div class="card" onclick="tampilkanDetail(2)">
+                    <img src="images/python.svg" alt="Ilustrasi Pelatihan Python untuk Pemula - kode Python di editor" loading="lazy" width="600" height="400">
+                    <div class="card-content">
+                        <h3>Pelatihan Python untuk Pemula</h3>
+                        <p>Kurikulum komprehensif untuk mempelajari bahasa pemrograman Python dari nol. Materi mencakup variabel, kontrol alur, fungsi, dan library populer yang sering digunakan.</p>
+                        <span class="badge">Pemula Friendly</span>
+                    </div>
+                </div>
+                <!-- Card 3 -->
+                <div class="card" onclick="tampilkanDetail(3)">
+                    <img src="images/javascript.svg" alt="Ilustrasi Bootcamp JavaScript Advanced - kode async dan DOM" loading="lazy" width="600" height="400">
+                    <div class="card-content">
+                        <h3>Bootcamp JavaScript Advanced</h3>
+                        <p>Program intensif untuk menguasai JavaScript tingkat lanjut, termasuk asynchronous programming, DOM manipulation, dan framework populer seperti React dan Vue.</p>
+                        <span class="badge">Intensif</span>
+                    </div>
+                </div>
+                <!-- Card 4 -->
+                <div class="card" onclick="tampilkanDetail(4)">
+                    <img src="images/mobile.svg" alt="Ilustrasi Pelatihan Mobile App Development - dua smartphone Flutter Dart" loading="lazy" width="600" height="400">
+                    <div class="card-content">
+                        <h3>Pelatihan Mobile App Development</h3>
+                        <p>Belajar mengembangkan aplikasi mobile untuk iOS dan Android menggunakan Dart dan Flutter. Peserta akan membuat project nyata dan siap untuk pasar kerja.</p>
+                        <span class="badge">Terbaru</span>
+                    </div>
+                </div>
+                <!-- Card 5 -->
+                <div class="card" onclick="tampilkanDetail(5)">
+                    <img src="images/hackathon.svg" alt="Ilustrasi Hackathon Mini - piala dan timer kompetisi 24 jam" loading="lazy" width="600" height="400">
+                    <div class="card-content">
+                        <h3>Hackathon Mini</h3>
+                        <p>Kompetisi coding 24 jam dengan tema inovatif dan hadiah menarik. Kesempatan sempurna untuk mengukur skill, berkolaborasi, dan networking dengan programmer lainnya.</p>
+                        <span class="badge">Kompetisi</span>
+                    </div>
+                </div>
+                <!-- Card 6 -->
+                <div class="card" onclick="tampilkanDetail(6)">
+                    <img src="images/mentoring.svg" alt="Ilustrasi Sesi Mentoring Karier IT - mentor dan peserta bimbingan karier" loading="lazy" width="600" height="400">
+                    <div class="card-content">
+                        <h3>Sesi Mentoring Karier IT</h3>
+                        <p>Bimbingan langsung dari profesional berpengalaman di industri teknologi. Topik meliputi persiapan interview, portfolio building, dan strategi pengembangan karir jangka panjang.</p>
+                        <span class="badge">Mentoring</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Ajakan daftar -->
+            <div class="cta-tengah">
+                <p>Klik card untuk lihat detail • Tertarik ikut?</p>
+                <button class="btn btn-primary" onclick="navigasiKePendaftaran()">Daftar Sekarang</button>
+            </div>
+        </section>
+
+        <!-- ===== HALAMAN: JADWAL ===== -->
+        <section id="jadwal" class="section">
+            <div class="hero">
+                <h1>Jadwal Kegiatan</h1>
+                <p>Daftar jadwal pelatihan terdekat. Segera amankan kursimu!</p>
+            </div>
+            <div class="breadcrumb">
+                <a onclick="tampilkanHalaman('beranda')">Beranda</a> &gt; Jadwal
+            </div>
+
+            <div class="schedule-item">
+                <h3>Workshop Web Development</h3>
+                <p class="date">📅 15 November 2026 • 09.00 - 15.00 WIB</p>
+                <p class="location">📍 Lab Komputer A</p>
+                <p class="capacity">Kuota: 30 peserta</p>
+            </div>
+            <div class="schedule-item">
+                <h3>Pelatihan Python untuk Pemula</h3>
+                <p class="date">📅 20 November 2026 • 09.00 - 15.00 WIB</p>
+                <p class="location">📍 Lab Komputer B</p>
+                <p class="capacity">Kuota: 25 peserta</p>
+            </div>
+            <div class="schedule-item">
+                <h3>Hackathon Mini</h3>
+                <p class="date">📅 10 Desember 2026 • 08.00 - 08.00 (24 jam)</p>
+                <p class="location">📍 Aula Utama</p>
+                <p class="capacity">Kuota: 50 peserta (10 tim)</p>
+            </div>
+            <div style="text-align:center">
+                <button class="btn btn-primary" onclick="navigasiKePendaftaran()">Daftar Sekarang</button>
+            </div>
+        </section>
+
+        <!-- ===== HALAMAN 2: PENDAFTARAN (wajib tugas) ===== -->
+        <section id="pendaftaran" class="section">
+            <div class="hero">
+                <h1>Pendaftaran Program</h1>
+                <p>Isi form di bawah ini untuk mendaftar ke program pelatihan Coding Academy</p>
+            </div>
+            <div class="breadcrumb">
+                <a onclick="tampilkanHalaman('beranda')">Beranda</a> &gt; Pendaftaran
+            </div>
+
+            <!-- Container form: lebar 100% max 580px, tengah, padding responsif -->
+            <div class="form-container">
+                <!-- Pesan sukses, muncul setelah Simpan + confirm OK -->
+                <div class="success-message">✓ Pendaftaran berhasil disimpan!</div>
+
+                <!-- Form: onsubmit dimatikan agar tidak reload -->
+                <form id="formPendaftaran" onsubmit="return false;" novalidate>
+                    <!-- 1. NIK - wajib 16 digit angka -->
+                    <div class="form-group">
+                        <label for="nik">NIK <span style="color:red">*</span></label>
+                        <input type="text" id="nik" placeholder="Masukkan 16 digit NIK" maxlength="16" inputmode="numeric" autocomplete="off">
+                        <span class="error-message"></span>
+                    </div>
+                    <!-- 2. Nama Lengkap - wajib -->
+                    <div class="form-group">
+                        <label for="nama">Nama Lengkap <span style="color:red">*</span></label>
+                        <input type="text" id="nama" placeholder="Masukkan nama lengkap Anda" autocomplete="name">
+                        <span class="error-message"></span>
+                    </div>
+                    <!-- 3. Jenis Kelamin - radio wajib -->
+                    <div class="form-group">
+                        <label>Jenis Kelamin <span style="color:red">*</span></label>
+                        <div class="radio-group" id="jenis-kelamin">
+                            <label><input type="radio" name="jenisKelamin" value="Laki-laki"> Laki-laki</label>
+                            <label><input type="radio" name="jenisKelamin" value="Perempuan"> Perempuan</label>
+                        </div>
+                        <span class="error-message"></span>
+                    </div>
+                    <!-- 4. No HP - wajib 10-13 digit, awalan 08/62 -->
+                    <div class="form-group">
+                        <label for="nohp">No HP <span style="color:red">*</span></label>
+                        <input type="tel" id="nohp" placeholder="Contoh: 081234567890" inputmode="numeric" autocomplete="tel">
+                        <span class="error-message"></span>
+                    </div>
+                    <!-- 5. Alamat - textarea wajib -->
+                    <div class="form-group">
+                        <label for="alamat">Alamat <span style="color:red">*</span></label>
+                        <textarea id="alamat" placeholder="Masukkan alamat lengkap Anda"></textarea>
+                        <span class="error-message"></span>
+                    </div>
+                    <!-- 6. Bahasa Pemrograman - dropdown wajib -->
+                    <div class="form-group">
+                        <label for="bahasa">Bahasa Pemrograman yang Diminati <span style="color:red">*</span></label>
+                        <select id="bahasa">
+                            <option value="">-- Pilih Bahasa Pemrograman --</option>
+                            <option value="HTML/CSS/JavaScript">HTML/CSS/JavaScript</option>
+                            <option value="Python">Python</option>
+                            <option value="Java">Java</option>
+                            <option value="PHP">PHP</option>
+                            <option value="C++">C++</option>
+                            <option value="Dart/Flutter">Dart/Flutter</option>
+                        </select>
+                        <span class="error-message"></span>
+                    </div>
+                    <!-- Tombol Simpan (validasi + confirm) dan Reset -->
+                    <div class="form-buttons">
+                        <button type="button" id="btnSimpan" class="btn btn-primary">Simpan</button>
+                        <button type="button" id="btn-reset" class="btn btn-secondary">Reset</button>
+                    </div>
+                </form>
+            </div>
+
+            <!-- Tabel hasil "Data Pendaftar" - ditampilkan dengan JS, scroll horizontal di HP -->
+            <div class="data-container" id="data-pendaftar-container">
+                <p class="no-data">Belum ada data pendaftar</p>
+            </div>
+        </section>
+
+        <!-- ===== HALAMAN: TENTANG ===== -->
+        <section id="tentang" class="section">
+            <div class="hero">
+                <h1>Tentang Coding Academy</h1>
+                <p>Mengenal lebih dekat visi, misi, dan cara menghubungi kami</p>
+            </div>
+            <div class="breadcrumb">
+                <a onclick="tampilkanHalaman('beranda')">Beranda</a> &gt; Tentang
+            </div>
+            <div class="schedule-item">
+                <h3>Visi Kami</h3>
+                <p>Mencetak 10.000 programmer Indonesia yang siap kerja dan berdaya saing global.</p>
+            </div>
+            <div class="schedule-item">
+                <h3>Kontak</h3>
+                <p class="location">📧 Email: info@codingacademy.id</p>
+                <p class="location">📱 WhatsApp: 0812-3456-7890</p>
+                <p class="location">📍 Alamat: Jl. Programmer No. 123, Jakarta</p>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- ===== FOOTER ===== -->
+    <footer>
+        <p>© 2026 Coding Academy</p>
+        <p>Belajar Koding • Membangun Masa Depan</p>
+    </footer>
+
+    <!-- JS dipasang di akhir agar DOM sudah siap -->
+    <script src="js/script.js"></script>
+</body>
+</html>

@@ -1,0 +1,943 @@
+/* =====================================================
+   Coding Academy - Stylesheet
+   Tema: dark navy + charcoal + aksen cyan
+   Komentar berbahasa Indonesia agar mudah dipelajari
+   ===================================================== */
+
+/* ===== 1. RESET & VARIABEL GLOBAL ===== */
+*, *::before, *::after {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box; /* Pastikan padding tidak menambah lebar elemen */
+}
+
+:root {
+    /* Palet warna utama */
+    --navy: #0f0c29;
+    --navy-2: #302b63;
+    --charcoal: #24243e;
+    --cyan: #00d4ff;
+    --cyan-dark: #0099cc;
+    --teks-gelap: #0f0c29;
+    --abu: #666;
+    --merah: #e74c3c;
+    --hijau-bg: #d4edda;
+    --hijau-teks: #155724;
+    --radius: 12px;
+    --tinggi-nav: 72px; /* dipakai untuk scroll-margin agar judul tidak tertutup navbar */
+}
+
+/* Cegah horizontal scrollbar di HP */
+html, body {
+    overflow-x: hidden;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background: linear-gradient(135deg, var(--navy), var(--navy-2), var(--charcoal));
+    background-attachment: fixed;
+    color: #333;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    line-height: 1.6;
+}
+
+img {
+    max-width: 100%;
+}
+
+/* ===== 2. NAVBAR ===== */
+nav {
+    background: rgba(15, 12, 41, 0.97);
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+    position: sticky; /* Menempel di atas saat scroll */
+    top: 0;
+    z-index: 100;
+    backdrop-filter: blur(6px);
+}
+
+/* Container dalam navbar: logo kiri, menu tengah/kanan, tema kanan */
+.nav-container {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+    width: min(100% - 32px, 1200px); /* Lebar konsisten, sisa 16px tiap sisi di HP */
+    margin: 0 auto;
+    padding: 0.9rem 0;
+    flex-wrap: wrap;
+}
+
+.nav-logo {
+    font-size: clamp(1.2rem, 3vw, 1.7rem);
+    font-weight: bold;
+    color: var(--cyan);
+    text-decoration: none;
+    letter-spacing: 1px;
+    cursor: pointer;
+    white-space: nowrap;
+}
+
+/* Menu desktop: horizontal dengan jarak konsisten */
+.nav-menu {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    list-style: none;
+    flex-wrap: wrap;
+}
+
+.nav-menu a {
+    color: #e0e0e0;
+    text-decoration: none;
+    font-weight: 500;
+    font-size: 0.95rem;
+    padding: 0.6rem 1rem; /* Area sentuh nyaman */
+    min-height: 44px;
+    display: inline-flex;
+    align-items: center;
+    border-radius: 6px;
+    transition: all 0.3s ease;
+    cursor: pointer;
+    white-space: nowrap;
+}
+
+.nav-menu a:hover {
+    color: var(--cyan);
+    background: rgba(0, 212, 255, 0.1);
+}
+
+/* Menu aktif diberi highlight */
+.nav-menu a.active {
+    color: var(--cyan);
+    background: rgba(0, 212, 255, 0.2);
+    border-bottom: 2px solid var(--cyan);
+}
+
+/* Grup kanan navbar: tombol tema + hamburger */
+.nav-actions {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+}
+
+/* Tombol ganti tema */
+.theme-toggle {
+    background: rgba(0, 212, 255, 0.15);
+    border: 2px solid var(--cyan);
+    color: var(--cyan);
+    padding: 0.55rem 1rem;
+    min-height: 44px;
+    border-radius: 8px;
+    cursor: pointer;
+    font-weight: 600;
+    font-size: 0.9rem;
+    transition: all 0.3s ease;
+    white-space: nowrap;
+}
+
+.theme-toggle:hover {
+    background: rgba(0, 212, 255, 0.3);
+}
+
+/* Tombol hamburger: disembunyikan di desktop, muncul di HP/tablet kecil */
+.hamburger {
+    display: none;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 5px;
+    width: 48px;
+    height: 48px; /* Target sentuh 48px */
+    background: transparent;
+    border: 2px solid var(--cyan);
+    border-radius: 8px;
+    cursor: pointer;
+}
+
+.hamburger span {
+    display: block;
+    width: 22px;
+    height: 2.5px;
+    background: var(--cyan);
+    border-radius: 2px;
+    transition: transform 0.3s ease, opacity 0.3s ease;
+}
+
+/* Animasi hamburger jadi silang (X) saat menu terbuka */
+.hamburger[aria-expanded="true"] span:nth-child(1) {
+    transform: translateY(7.5px) rotate(45deg);
+}
+.hamburger[aria-expanded="true"] span:nth-child(2) {
+    opacity: 0;
+}
+.hamburger[aria-expanded="true"] span:nth-child(3) {
+    transform: translateY(-7.5px) rotate(-45deg);
+}
+
+/* ===== 3. KONTEN UTAMA ===== */
+main {
+    flex: 1;
+    width: min(100% - 32px, 1200px); /* Konsisten: 16px margin tiap sisi di HP */
+    margin: 0 auto;
+    padding: 2.5rem 0 3rem;
+}
+
+/* Setiap halaman (section): hanya yang .active yang tampil */
+.section {
+    display: none;
+    animation: fadeIn 0.3s ease;
+    scroll-margin-top: calc(var(--tinggi-nav) + 16px); /* Judul tidak tertutup navbar sticky */
+}
+
+.section.active {
+    display: block;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+
+/* ===== 4. HERO (judul tiap halaman) ===== */
+.hero {
+    text-align: center;
+    margin-bottom: 2rem;
+    color: white;
+    padding: 0 0.5rem;
+}
+
+.hero h1 {
+    /* Font responsif: min 1.6rem, ideal 4vw, max 2.5rem */
+    font-size: clamp(1.6rem, 4vw, 2.5rem);
+    line-height: 1.25;
+    margin-bottom: 0.75rem;
+    color: var(--cyan);
+    text-shadow: 0 2px 10px rgba(0, 212, 255, 0.3);
+}
+
+.hero p {
+    font-size: clamp(0.95rem, 2.5vw, 1.1rem);
+    color: #bbb;
+    max-width: 700px;
+    margin: 0 auto;
+}
+
+/* Grup tombol di beranda: wrap rapi, tidak bertumpuk */
+.hero-actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem;
+    justify-content: center;
+    align-items: center;
+    margin-top: 1.5rem;
+}
+
+.hero-actions .btn {
+    margin-top: 0; /* Reset margin bawaan .btn-primary agar sejajar */
+}
+
+/* Teks pengantar beranda */
+.intro-text {
+    text-align: center;
+    color: white;
+    max-width: 700px;
+    margin: 0 auto 1rem;
+    line-height: 1.7;
+    font-size: clamp(0.95rem, 2.5vw, 1.05rem);
+}
+
+/* ===== 5. BREADCRUMB ===== */
+.breadcrumb {
+    color: #bbb;
+    margin-bottom: 1.5rem;
+    font-size: 0.9rem;
+}
+
+.breadcrumb a {
+    color: var(--cyan);
+    text-decoration: none;
+    cursor: pointer;
+}
+
+.breadcrumb a:hover {
+    text-decoration: underline;
+}
+
+/* ===== 6. GALLERY ===== */
+.search-bar {
+    margin-bottom: 1.5rem;
+    text-align: center;
+}
+
+.search-bar input {
+    padding: 0.8rem 1.2rem;
+    min-height: 48px; /* Nyaman disentuh */
+    border: 2px solid var(--cyan);
+    border-radius: 8px;
+    background: rgba(0, 212, 255, 0.1);
+    color: white;
+    width: 100%;
+    max-width: 480px;
+    font-size: 16px; /* 16px mencegah auto-zoom di iOS */
+    font-family: inherit;
+}
+
+.search-bar input::placeholder {
+    color: #bbb;
+}
+
+.search-bar input:focus {
+    outline: none;
+    box-shadow: 0 0 0 3px rgba(0, 212, 255, 0.25);
+}
+
+/* Grid responsif: 3 kolom desktop, 2 tablet, 1 HP */
+.gallery-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1.5rem;
+    margin-bottom: 2.5rem;
+}
+
+/* Kartu kegiatan */
+.card {
+    background: white;
+    border-radius: var(--radius);
+    overflow: hidden;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    cursor: pointer;
+    display: flex;
+    flex-direction: column;
+    min-width: 0; /* Cegah card meluber di grid */
+}
+
+.card:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 12px 25px rgba(0, 212, 255, 0.3);
+}
+
+/* Gambar konsisten: penuh, dipotong rapi */
+.card img {
+    width: 100%;
+    height: 220px;
+    object-fit: cover;
+    display: block;
+    aspect-ratio: 3 / 2;
+}
+
+.card-content {
+    padding: 1.25rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    flex: 1;
+}
+
+.card-content h3 {
+    color: var(--teks-gelap);
+    font-size: clamp(1.05rem, 2.5vw, 1.25rem);
+    line-height: 1.35;
+}
+
+.card-content p {
+    color: var(--abu);
+    line-height: 1.6;
+    font-size: 0.95rem;
+    flex: 1;
+}
+
+/* Label kecil di card */
+.badge {
+    display: inline-block;
+    align-self: flex-start;
+    background: var(--cyan);
+    color: var(--navy);
+    padding: 0.3rem 0.8rem;
+    border-radius: 20px;
+    font-size: 0.8rem;
+    font-weight: 600;
+    margin-top: 0.5rem;
+}
+
+/* Ajakan di bawah gallery */
+.cta-tengah {
+    text-align: center;
+}
+
+.cta-tengah p {
+    color: #bbb;
+    margin-bottom: 0.75rem;
+    font-size: 0.95rem;
+}
+
+.cta-tengah .btn {
+    margin-top: 0;
+}
+
+/* ===== 7. TOMBOL ===== */
+.btn {
+    padding: 0.8rem 1.5rem;
+    min-height: 48px; /* Target sentuh ramah HP */
+    border: none;
+    border-radius: 8px;
+    font-size: 1rem;
+    font-weight: 600;
+    font-family: inherit;
+    cursor: pointer;
+    transition: transform 0.2s ease, box-shadow 0.3s ease, background 0.3s ease;
+    text-decoration: none;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.btn-primary {
+    background: linear-gradient(135deg, var(--cyan), var(--cyan-dark));
+    color: white;
+    margin-top: 2rem;
+}
+
+.btn-primary:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(0, 212, 255, 0.4);
+}
+
+.btn-primary:active {
+    transform: scale(0.98);
+}
+
+.btn-secondary {
+    background: #e0e0e0;
+    color: var(--navy);
+}
+
+/* Hapus margin kanan bawaan, pakai gap flex saja agar konsisten */
+.form-buttons .btn-secondary,
+.hero-actions .btn-secondary {
+    margin-right: 0;
+}
+
+.btn-secondary:hover {
+    background: #bbb;
+}
+
+.btn-small {
+    padding: 0.5rem 1rem;
+    min-height: 40px;
+    font-size: 0.9rem;
+}
+
+.btn-danger {
+    background: var(--merah);
+    color: white;
+}
+
+.btn-danger:hover {
+    background: #c0392b;
+}
+
+/* Fokus keyboard terlihat jelas (aksesibilitas) */
+.btn:focus-visible,
+.nav-menu a:focus-visible,
+.theme-toggle:focus-visible,
+.hamburger:focus-visible,
+input:focus-visible,
+textarea:focus-visible,
+select:focus-visible {
+    outline: 3px solid var(--cyan);
+    outline-offset: 2px;
+}
+
+/* ===== 8. FORM PENDAFTARAN ===== */
+/* Container form: tengah, lebar penuh max 580px */
+.form-container {
+    background: white;
+    width: 100%;
+    max-width: 580px;
+    margin: 0 auto;
+    padding: clamp(1rem, 4vw, 2rem); /* Padding responsif: 16px di HP, 32px di desktop */
+    border-radius: var(--radius);
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.15);
+}
+
+.form-group {
+    margin-bottom: 1.25rem;
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: 0.5rem;
+    font-weight: 600;
+    color: var(--navy);
+    font-size: 0.95rem;
+}
+
+.form-group input,
+.form-group textarea,
+.form-group select {
+    width: 100%;
+    max-width: 100%;
+    padding: 0.8rem;
+    min-height: 48px;
+    border: 2px solid #ddd;
+    border-radius: 8px;
+    font-size: 16px; /* Cegah zoom otomatis di iPhone */
+    font-family: inherit;
+    background: #fff;
+    color: #222;
+    transition: border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.form-group input:focus,
+.form-group textarea:focus,
+.form-group select:focus {
+    outline: none;
+    border-color: var(--cyan);
+    box-shadow: 0 0 0 3px rgba(0, 212, 255, 0.15);
+}
+
+.form-group textarea {
+    resize: vertical;
+    min-height: 120px;
+}
+
+/* Radio button: sejajar, wrap jika sempit */
+.radio-group {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.75rem 2rem;
+    margin-top: 0.5rem;
+}
+
+.radio-group label {
+    display: inline-flex;
+    align-items: center;
+    margin-bottom: 0;
+    font-weight: 500;
+    gap: 0.5rem;
+    min-height: 44px;
+    cursor: pointer;
+}
+
+.radio-group input[type="radio"] {
+    width: 20px;
+    height: 20px;
+    min-height: 0;
+    margin: 0;
+    padding: 0;
+    accent-color: var(--cyan-dark);
+    cursor: pointer;
+    flex-shrink: 0;
+}
+
+/* Pesan error di bawah field */
+.error-message {
+    color: var(--merah);
+    font-size: 0.85rem;
+    margin-top: 0.35rem;
+    display: none;
+}
+
+.form-group.error .error-message {
+    display: block;
+}
+
+.form-group.error input,
+.form-group.error textarea,
+.form-group.error select {
+    border-color: var(--merah);
+    background-color: #fff5f5;
+}
+
+/* Pesan sukses */
+.success-message {
+    background: var(--hijau-bg);
+    color: var(--hijau-teks);
+    padding: 1rem;
+    border-radius: 8px;
+    margin-bottom: 1.5rem;
+    display: none;
+    border-left: 4px solid #28a745;
+    font-weight: 500;
+}
+
+.success-message.show {
+    display: block;
+    animation: slideDown 0.3s ease;
+}
+
+@keyframes slideDown {
+    from { opacity: 0; transform: translateY(-10px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+/* Tombol form: sejajar di desktop */
+.form-buttons {
+    display: flex;
+    gap: 1rem;
+    justify-content: center;
+    margin-top: 1.75rem;
+}
+
+/* Reset margin-top bawaan agar Simpan & Reset benar-benar sejajar */
+.form-buttons .btn {
+    flex: 1;
+    max-width: 180px;
+    margin-top: 0;
+}
+
+/* ===== 9. TABEL DATA PENDAFTAR ===== */
+.data-container {
+    margin-top: 2.5rem;
+    width: 100%;
+    max-width: 100%;
+}
+
+.data-container h3 {
+    color: white;
+    margin-bottom: 1.25rem;
+    text-align: center;
+    font-size: clamp(1.2rem, 3vw, 1.5rem);
+}
+
+/* Pembungkus agar tabel bisa di-scroll horizontal di HP tanpa merusak layout */
+.table-wrapper {
+    width: 100%;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    border-radius: var(--radius);
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.15);
+}
+
+.data-table {
+    width: 100%;
+    min-width: 760px; /* Tabel scroll di dalam wrapper, bukan seluruh halaman */
+    border-collapse: collapse;
+    background: white;
+}
+
+.data-table th {
+    background: linear-gradient(135deg, var(--navy), var(--navy-2));
+    color: white;
+    padding: 0.9rem 1rem;
+    text-align: left;
+    font-weight: 600;
+    font-size: 0.9rem;
+    white-space: nowrap;
+}
+
+.data-table td {
+    padding: 0.9rem 1rem;
+    border-bottom: 1px solid #eee;
+    color: #333;
+    font-size: 0.9rem;
+    vertical-align: top;
+    word-break: break-word;
+}
+
+.data-table tbody tr:hover {
+    background: #f4fbff;
+}
+
+.data-table tbody tr:last-child td {
+    border-bottom: none;
+}
+
+.total-pendaftar {
+    text-align: center;
+    color: white;
+    margin-top: 1rem;
+    font-size: 0.95rem;
+}
+
+.no-data {
+    text-align: center;
+    color: white;
+    padding: 2rem 1rem;
+    font-size: 1rem;
+}
+
+/* ===== 10. JADWAL & TENTANG ===== */
+.schedule-item {
+    background: rgba(255, 255, 255, 0.08);
+    border-left: 4px solid var(--cyan);
+    padding: 1.25rem 1.5rem;
+    margin-bottom: 1.25rem;
+    border-radius: 8px;
+    color: white;
+}
+
+.schedule-item h3 {
+    color: var(--cyan);
+    margin-bottom: 0.5rem;
+    font-size: clamp(1.05rem, 2.5vw, 1.25rem);
+}
+
+.schedule-item .date {
+    font-size: 0.9rem;
+    color: #bbb;
+    margin-bottom: 0.35rem;
+}
+
+.schedule-item .location {
+    color: #ddd;
+    margin-bottom: 0.35rem;
+    font-size: 0.95rem;
+}
+
+.schedule-item .capacity {
+    font-size: 0.9rem;
+    color: #aaa;
+}
+
+/* ===== 11. FOOTER ===== */
+footer {
+    background: rgba(15, 12, 41, 0.97);
+    color: #bbb;
+    text-align: center;
+    padding: 1.5rem 1rem;
+    margin-top: auto;
+    border-top: 1px solid rgba(0, 212, 255, 0.2);
+}
+
+footer p {
+    margin-bottom: 0.35rem;
+    font-size: 0.95rem;
+}
+
+footer p:last-child {
+    margin-bottom: 0;
+}
+
+/* ===== 12. MODE GELAP (tambahan kontras diperbaiki) ===== */
+body.dark-mode {
+    background: linear-gradient(135deg, #000, #14141c, #1a1a24);
+    background-attachment: fixed;
+    color: #eee;
+}
+
+body.dark-mode .card {
+    background: #1e1e2c;
+}
+
+body.dark-mode .card-content h3 {
+    color: var(--cyan);
+}
+
+body.dark-mode .card-content p {
+    color: #c9c9d4;
+}
+
+body.dark-mode .form-container {
+    background: #1e1e2c;
+}
+
+body.dark-mode .form-group label {
+    color: var(--cyan);
+}
+
+/* Input tetap terbaca di dark mode: bg gelap + teks terang */
+body.dark-mode .form-group input,
+body.dark-mode .form-group textarea,
+body.dark-mode .form-group select {
+    background: #2a2a3c;
+    border-color: #4a4a5e;
+    color: #fff;
+}
+
+body.dark-mode .form-group input::placeholder,
+body.dark-mode .form-group textarea::placeholder {
+    color: #9a9ab0;
+}
+
+body.dark-mode .radio-group label {
+    color: #e0e0e0;
+}
+
+body.dark-mode .data-table {
+    background: #1e1e2c;
+}
+
+body.dark-mode .data-table td {
+    color: #e6e6ee;
+    border-bottom-color: #33334a;
+}
+
+body.dark-mode .data-table tbody tr:hover {
+    background: #26263a;
+}
+
+body.dark-mode .schedule-item {
+    background: rgba(255, 255, 255, 0.05);
+}
+
+/* =====================================================
+   13. RESPONSIVE BREAKPOINTS
+   - Desktop besar: > 1024px (3 kolom)
+   - Laptop/tablet: <= 1024px
+   - Tablet: <= 768px (2 kolom, hamburger muncul)
+   - HP: <= 480px (1 kolom, tombol full-width)
+   ===================================================== */
+
+/* Laptop kecil / tablet landscape */
+@media (max-width: 1024px) {
+    .gallery-grid {
+        grid-template-columns: repeat(3, 1fr);
+        gap: 1.25rem;
+    }
+
+    .card img {
+        height: 200px;
+    }
+
+    .nav-menu a {
+        padding: 0.6rem 0.8rem;
+        font-size: 0.9rem;
+    }
+}
+
+/* Tablet portrait: hamburger muncul, grid 2 kolom */
+@media (max-width: 768px) {
+    :root {
+        --tinggi-nav: 68px;
+    }
+
+    /* Tampilkan hamburger, sembunyikan menu horizontal */
+    .hamburger {
+        display: inline-flex;
+    }
+
+    .nav-container {
+        padding: 0.75rem 0;
+    }
+
+    /* Menu vertikal tersembunyi secara default */
+    .nav-menu {
+        display: none;
+        flex-direction: column;
+        align-items: stretch;
+        width: 100%;
+        gap: 0.35rem;
+        padding: 0.75rem 0 0.5rem;
+        border-top: 1px solid rgba(0, 212, 255, 0.2);
+        order: 3; /* Pindah ke baris bawah dalam flex-wrap */
+    }
+
+    /* Menu terbuka setelah hamburger diklik (class .open dari JS) */
+    .nav-menu.open {
+        display: flex;
+    }
+
+    .nav-menu a {
+        width: 100%;
+        justify-content: flex-start;
+        font-size: 1rem;
+    }
+
+    .theme-toggle {
+        font-size: 0.85rem;
+        padding: 0.5rem 0.8rem;
+    }
+
+    main {
+        padding: 2rem 0 2.5rem;
+    }
+
+    .gallery-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 1.25rem;
+    }
+
+    .card img {
+        height: 190px;
+    }
+
+    .form-container {
+        padding: 1.5rem;
+    }
+
+    .radio-group {
+        gap: 0.5rem 1.5rem;
+    }
+}
+
+/* HP: 1 kolom, form full-width dengan margin 16px */
+@media (max-width: 480px) {
+    .gallery-grid {
+        grid-template-columns: 1fr;
+        gap: 1.25rem;
+    }
+
+    .card img {
+        height: 200px;
+    }
+
+    .hero {
+        margin-bottom: 1.5rem;
+    }
+
+    /* Form: padding kartu 16-20px, tombol full-width bertumpuk */
+    .form-container {
+        padding: 1.25rem 1rem;
+    }
+
+    .form-buttons {
+        flex-direction: column;
+    }
+
+    .form-buttons .btn {
+        max-width: none;
+        width: 100%;
+    }
+
+    /* Tombol hero juga full-width di HP kecil */
+    .hero-actions .btn {
+        width: 100%;
+        max-width: 340px;
+    }
+
+    .data-table {
+        font-size: 0.82rem;
+    }
+
+    .data-table th,
+    .data-table td {
+        padding: 0.7rem 0.75rem;
+    }
+
+    .search-bar input {
+        max-width: 100%;
+    }
+
+    .schedule-item {
+        padding: 1rem 1.1rem;
+    }
+
+    .theme-toggle {
+        font-size: 0.8rem;
+        padding: 0.5rem 0.7rem;
+    }
+}
+
+/* HP sangat kecil (360px ke bawah): pastikan tidak ada yang meluber */
+@media (max-width: 360px) {
+    .nav-logo {
+        font-size: 1.15rem;
+    }
+
+    .theme-toggle {
+        font-size: 0.75rem;
+    }
+
+    .hamburger {
+        width: 44px;
+        height: 44px;
+    }
+}

@@ -1,0 +1,28 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="600" height="400" viewBox="0 0 600 400">
+  <!-- Ilustrasi: Bootcamp JavaScript Advanced - JS + kurung kurawal -->
+  <defs>
+    <linearGradient id="bg3" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#1a1200"/>
+      <stop offset="1" stop-color="#3b2d00"/>
+    </linearGradient>
+  </defs>
+  <rect width="600" height="400" fill="url(#bg3)"/>
+  <!-- Simbol { } besar -->
+  <text x="300" y="300" text-anchor="middle" font-family="monospace" font-size="260" font-weight="bold" fill="#f7df1e" opacity="0.11">{ }</text>
+  <!-- Kartu -->
+  <rect x="90" y="55" width="420" height="290" rx="14" fill="#1a1a0a" stroke="#f7df1e" stroke-width="2.5"/>
+  <rect x="90" y="55" width="420" height="42" rx="14" fill="#2a2200"/>
+  <rect x="90" y="81" width="420" height="16" fill="#2a2200"/>
+  <!-- Badge JS -->
+  <rect x="430" y="62" width="58" height="28" rx="4" fill="#f7df1e"/>
+  <text x="459" y="81" text-anchor="middle" font-family="sans-serif" font-size="16" font-weight="bold" fill="#000">JS</text>
+  <text x="115" y="83" font-family="monospace" font-size="12" fill="#f7df1e">workshop/javascript • advanced</text>
+  <!-- Kode -->
+  <text x="120" y="135" font-family="monospace" font-size="15" fill="#ff79c6">async function bootcamp() {</text>
+  <text x="140" y="165" font-family="monospace" font-size="14" fill="#f1fa8c">  const skill = await belajar(</text>
+  <text x="160" y="190" font-family="monospace" font-size="14" fill="#8be9fd">"JS Advanced");</text>
+  <text x="140" y="218" font-family="monospace" font-size="14" fill="#50fa7b">  dom.render(skill);</text>
+  <text x="140" y="246" font-family="monospace" font-size="14" fill="#bd93f9">  return "Siap kerja!";</text>
+  <text x="120" y="274" font-family="monospace" font-size="15" fill="#ff79c6">}</text>
+  <text x="120" y="312" font-family="monospace" font-size="13" fill="#6272a4">// React • Vue • Async • DOM</text>
+</svg>

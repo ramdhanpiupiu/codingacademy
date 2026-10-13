@@ -1,0 +1,29 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="600" height="400" viewBox="0 0 600 400">
+  <!-- Ilustrasi: Python untuk Pemula - logo ular + kode Python -->
+  <defs>
+    <linearGradient id="bg2" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#0a1629"/>
+      <stop offset="1" stop-color="#1b3a5c"/>
+    </linearGradient>
+  </defs>
+  <rect width="600" height="400" fill="url(#bg2)"/>
+  <!-- Simbol ular Python abstrak -->
+  <g opacity="0.14">
+    <path d="M180 130 Q150 190 190 240 Q210 270 250 260 Q300 250 320 200 Q340 150 300 120 Q260 90 180 130Z" fill="none" stroke="#ffd343" stroke-width="18" stroke-linecap="round"/>
+    <path d="M380 130 Q410 190 370 240 Q350 270 310 260 Q260 250 240 200 Q220 150 260 120 Q300 90 380 130Z" fill="none" stroke="#3776ab" stroke-width="18" stroke-linecap="round"/>
+  </g>
+  <!-- Kartu kode -->
+  <rect x="100" y="60" width="400" height="280" rx="14" fill="#1a1a2e" stroke="#ffd343" stroke-width="2.5"/>
+  <rect x="100" y="60" width="400" height="40" rx="14" fill="#162030"/>
+  <rect x="100" y="84" width="400" height="16" fill="#162030"/>
+  <text x="130" y="85" font-family="monospace" font-size="13" fill="#ffd343">python &gt; belajar_python.py</text>
+  <circle cx="450" cy="78" r="10" fill="#3776ab"/>
+  <text x="450" y="82" text-anchor="middle" font-family="sans-serif" font-size="14" font-weight="bold" fill="white">Py</text>
+  <!-- Kode Python -->
+  <text x="130" y="140" font-family="monospace" font-size="16" fill="#ff79c6">def sapa(nama):</text>
+  <text x="150" y="168" font-family="monospace" font-size="16" fill="#ffffff">    print(f"Halo, {nama}!")</text>
+  <text x="130" y="200" font-family="monospace" font-size="16" fill="#8be9fd">for i in range(5):</text>
+  <text x="150" y="228" font-family="monospace" font-size="16" fill="#f1fa8c">    sapa("Pemula")</text>
+  <text x="130" y="260" font-family="monospace" font-size="14" fill="#6272a4"># Mudah, seru, pemula friendly</text>
+  <text x="130" y="300" font-family="monospace" font-size="18" fill="#50fa7b">▶ Hello, Pemula! ×5</text>
+</svg>
